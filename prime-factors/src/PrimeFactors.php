@@ -4,7 +4,7 @@ namespace PHPKatas\PrimeFactors;
 
 final class PrimeFactors
 {
-    public function generate($number)
+    public function generate(int $number): array
     {
         $primes = [];
 
