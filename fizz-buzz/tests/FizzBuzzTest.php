@@ -14,7 +14,7 @@ class FizzBuzzTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new FizzBuzz())->execute(-1);
+        (new FizzBuzz(-1))->execute();
     }
 
     /** @test */
@@ -22,7 +22,7 @@ class FizzBuzzTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        (new FizzBuzz())->execute('I am a string');
+        (new FizzBuzz('I am a string'))->execute();
     }
 
     /**
@@ -35,7 +35,7 @@ class FizzBuzzTest extends TestCase
     {
         $this->assertEquals(
             $expected,
-            (new FizzBuzz())->execute($given)
+            (new FizzBuzz($given))->execute()
         );
     }
 
