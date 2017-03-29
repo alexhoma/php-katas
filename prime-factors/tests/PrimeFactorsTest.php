@@ -17,39 +17,30 @@ class PrimeFactorsTest extends TestCase
         $this->primeFactors = new PrimeFactors();
     }
 
-    /** @test */
-    public function it_should_return_empty_array_when_number_is_1_or_less()
+    /**
+     * @test
+     * @dataProvider numbersProvider
+     * 
+     * @param $given
+     * @param $expected
+     */
+    public function it_should_return_empty_array_when_number_is_1_or_less($given, $expected)
     {
-        $this->assertEmpty($this->primeFactors->generate(1));
-    }
-    
-    /** @test */
-    public function it_should_return_2_when_number_is_2()
-    {
-        $this->assertEquals([2], $this->primeFactors->generate(2));
-    }
-
-    /** @test */
-    public function it_should_return_3_when_number_is_3()
-    {
-        $this->assertEquals([3], $this->primeFactors->generate(3));
+        $this->assertEquals(
+            $expected,
+            $this->primeFactors->generate($given)
+        );
     }
 
-    /** @test */
-    public function it_should_return_2_2_when_number_is_4()
+    public function numbersProvider()
     {
-        $this->assertEquals([2,2], $this->primeFactors->generate(4));
-    }
-
-    /** @test */
-    public function it_should_return_5_when_number_is_5()
-    {
-        $this->assertEquals([5], $this->primeFactors->generate(5));
-    }
-
-    /** @test */
-    public function it_should_return_2_3_when_number_is_6()
-    {
-        $this->assertEquals([2, 3], $this->primeFactors->generate(6));
+        return [
+            [1, []], [2, [2]],
+            [3, [3]], [4, [2,2]], [5, [5]],
+            [6, [2, 3]], [7, [7]], [8, [2, 2, 2]],
+            [9, [3, 3]], [10, [2, 5]], [11, [11]],
+            [12, [2, 2, 3]], [13, [13]], [14, [2, 7]],
+            [15, [3, 5]], [25, [5, 5]], [100, [2, 2, 5, 5]]
+        ];
     }
 }
