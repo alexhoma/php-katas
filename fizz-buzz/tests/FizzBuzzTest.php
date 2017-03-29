@@ -2,7 +2,7 @@
 
 namespace PHPKatas\FizzBuzzTest;
 
-use Exception;
+use InvalidArgumentException;
 use PHPKatas\FizzBuzz\FizzBuzz;
 use PHPUnit\Framework\TestCase;
 use TypeError;
@@ -12,7 +12,7 @@ class FizzBuzzTest extends TestCase
     /** @test */
     public function it_should_return_exception_when_number_is_negative()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(InvalidArgumentException::class);
 
         (new FizzBuzz())->execute(-1);
     }

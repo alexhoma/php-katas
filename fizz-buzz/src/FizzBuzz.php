@@ -2,26 +2,27 @@
 
 namespace PHPKatas\FizzBuzz;
 
-use Exception;
+use InvalidArgumentException;
 
 final class FizzBuzz
 {
+    const FIZZ_STRING = 'Fizz';
+    const BUZZ_STRING = 'Buzz';
+
     public function execute(int $number)
     {
-        if ($this->isZeroOrNegative($number)) {
-            throw new Exception('Number can not be negative.');
-        }
+        $this->checkIsValidNumber($number);
 
         if ($this->isDivisibleByThreeAndFive($number)) {
-            return 'FizzBuzz';
+            return self::FIZZ_STRING . self::BUZZ_STRING;
         }
 
         if ($this->isDivisibleByThree($number)) {
-            return 'Fizz';
+            return self::FIZZ_STRING;
         }
 
         if ($this->isDivisibleByFive($number)) {
-            return 'Buzz';
+            return self::BUZZ_STRING;
         }
 
         return $number;
@@ -46,5 +47,16 @@ final class FizzBuzz
     {
         return $this->isDivisibleByThree($number)
                && $this->isDivisibleByFive($number);
+    }
+
+    /**
+     * @param int $number
+     * @throws Exception
+     */
+    private function checkIsValidNumber(int $number)
+    {
+        if ($this->isZeroOrNegative($number)) {
+            throw new InvalidArgumentException('Number can not be negative.');
+        }
     }
 }
