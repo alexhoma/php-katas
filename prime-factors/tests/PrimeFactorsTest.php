@@ -7,20 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class PrimeFactorsTest extends TestCase
 {
-    /** @var PrimeFactors */
-    private $primeFactors;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->primeFactors = new PrimeFactors();
-    }
-
     /**
      * @test
      * @dataProvider numbersProvider
-     * 
      * @param $given
      * @param $expected
      */
@@ -28,7 +17,7 @@ class PrimeFactorsTest extends TestCase
     {
         $this->assertEquals(
             $expected,
-            $this->primeFactors->generate($given)
+            (new PrimeFactors())->generate($given)
         );
     }
 
