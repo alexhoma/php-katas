@@ -4,6 +4,7 @@ namespace PHPKatas\FizzBuzzTest;
 
 use InvalidArgumentException;
 use PHPKatas\FizzBuzz\FizzBuzz;
+use PHPKatas\FizzBuzz\Number;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
@@ -14,7 +15,10 @@ class FizzBuzzTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new FizzBuzz(-1))->execute();
+        $negativeNumber = Number::create(-1);
+
+        (new FizzBuzz($negativeNumber))
+            ->execute();
     }
 
     /** @test */
@@ -22,7 +26,9 @@ class FizzBuzzTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        (new FizzBuzz('I am a string'))->execute();
+        $string = Number::create('I am a string');
+
+        (new FizzBuzz($string))->execute();
     }
 
     /**
@@ -31,11 +37,14 @@ class FizzBuzzTest extends TestCase
      * @param $given
      * @param $expected
      */
-    public function it_should_return_1_when_number_is_1($given, $expected)
+    public function it_should_return_expected_with_the_number_given($given, $expected)
     {
+        $number = Number::create($given);
+
         $this->assertEquals(
             $expected,
-            (new FizzBuzz($given))->execute()
+            (new FizzBuzz($number))
+                ->execute()
         );
     }
 
