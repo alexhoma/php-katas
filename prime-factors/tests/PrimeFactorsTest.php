@@ -18,7 +18,7 @@ class PrimeFactorsTest extends TestCase
     }
 
     /** @test */
-    public function it_should_return_null_when_number_is_1_or_less()
+    public function it_should_return_empty_array_when_number_is_1_or_less()
     {
         $this->assertEmpty($this->primeFactors->generate(1));
     }
@@ -41,15 +41,15 @@ class PrimeFactorsTest extends TestCase
         $this->assertEquals([2,2], $this->primeFactors->generate(4));
     }
 
-    /** @test */
-    public function it_should_return_5_when_number_is_5()
-    {
-        $this->assertEquals([5], $this->primeFactors->generate(5));
-    }
-
-    /** @test */
-    public function it_should_return_2_3_when_number_is_6()
-    {
-        $this->assertEquals([2, 3], $this->primeFactors->generate(6));
-    }
+//    /** @test */
+//    public function it_should_return_5_when_number_is_5()
+//    {
+//        $this->assertEquals([5], $this->primeFactors->generate(5));
+//    }
+//
+//    /** @test */
+//    public function it_should_return_2_3_when_number_is_6()
+//    {
+//        $this->assertEquals([2, 3], $this->primeFactors->generate(6));
+//    }
 }
