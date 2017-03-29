@@ -5,6 +5,8 @@ namespace PHPKatas\FizzBuzzTest;
 use InvalidArgumentException;
 use PHPKatas\FizzBuzz\FizzBuzz;
 use PHPKatas\FizzBuzz\Number;
+use PHPKatas\FizzBuzzTest\Dependencies\InvalidNumberStub;
+use PHPKatas\FizzBuzzTest\Dependencies\NegativeNumberStub;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
@@ -15,18 +17,17 @@ class FizzBuzzTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $negativeNumber = Number::create(-1);
+        $negativeNumber = NegativeNumberStub::random();
 
-        (new FizzBuzz($negativeNumber))
-            ->execute();
+        (new FizzBuzz($negativeNumber))->execute();
     }
 
     /** @test */
-    public function it_should_return_type_error_exception_when_is_string()
+    public function it_should_return_type_error_exception_when_is_invalid_number()
     {
         $this->expectException(TypeError::class);
 
-        $string = Number::create('I am a string');
+        $string = InvalidNumberStub::random();
 
         (new FizzBuzz($string))->execute();
     }
@@ -43,8 +44,7 @@ class FizzBuzzTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            (new FizzBuzz($number))
-                ->execute()
+            (new FizzBuzz($number))->execute()
         );
     }
 
@@ -54,7 +54,9 @@ class FizzBuzzTest extends TestCase
             [1, 1], [2, 2], [3, 'Fizz'],
             [4, 4], [5, 'Buzz'], [6, 'Fizz'],
             [7, 7], [8, 8], [9, 'Fizz'],
-            [10, 'Buzz'], [12, 'Fizz'], [15, 'FizzBuzz']
+            [10, 'Buzz'], [12, 'Fizz'], [15, 'FizzBuzz'],
+            [16, 16], [17, 17], [18, 'Fizz'],
+            [19, 19], [20, 'Buzz'], [21, 'Fizz']
         ];
     }
 }
