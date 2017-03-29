@@ -6,7 +6,7 @@ final class PrimeFactors
 {
     public function generate($number)
     {
-        $primes  = [];
+        $primes = [];
 
         for ($divider = 2; $number >= $divider; $divider++) {
             for (; $number % $divider == 0; $number /= $divider) {
