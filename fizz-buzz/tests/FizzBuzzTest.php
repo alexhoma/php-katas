@@ -21,52 +21,31 @@ class FizzBuzzTest extends TestCase
     public function it_should_return_type_error_exception_when_is_string()
     {
         $this->expectException(TypeError::class);
-        
+
         (new FizzBuzz())->execute('I am a string');
     }
 
-    /** @test */
-    public function it_should_return_1_when_number_is_1()
+    /**
+     * @test
+     * @dataProvider numbersProvider
+     * @param $given
+     * @param $expected
+     */
+    public function it_should_return_1_when_number_is_1($given, $expected)
     {
         $this->assertEquals(
-            1,
-            (new FizzBuzz())->execute(1)
+            $expected,
+            (new FizzBuzz())->execute($given)
         );
     }
 
-    /** @test */
-    public function it_should_return_2_when_number_is_2()
+    public function numbersProvider()
     {
-        $this->assertEquals(
-            2,
-            (new FizzBuzz())->execute(2)
-        );
-    }
-
-    /** @test */
-    public function it_should_return_Fizz_when_number_is_divisible_by_3()
-    {
-        $this->assertEquals(
-            'Fizz',
-            (new FizzBuzz())->execute(3)
-        );
-    }
-
-    /** @test */
-    public function it_should_return_Buzz_when_number_is_divisible_by_5()
-    {
-        $this->assertEquals(
-            'Buzz',
-            (new FizzBuzz())->execute(5)
-        );
-    }
-
-    /** @test */
-    public function it_should_return_FizzBuzz_when_number_is_divisible_by_3_and_5()
-    {
-        $this->assertEquals(
-            'FizzBuzz',
-            (new FizzBuzz())->execute(15)
-        );
+        return [
+            [1, 1], [2, 2], [3, 'Fizz'],
+            [4, 4], [5, 'Buzz'], [6, 'Fizz'],
+            [7, 7], [8, 8], [9, 'Fizz'],
+            [10, 'Buzz'], [12, 'Fizz'], [15, 'FizzBuzz']
+        ];
     }
 }
