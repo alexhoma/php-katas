@@ -9,8 +9,6 @@ class Game
     public function roll(int $knockedPins)
     {
         $this->score = $this->score + $knockedPins;
-
-        return $this->score;
     }
 
     public function score()
