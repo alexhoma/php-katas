@@ -8,6 +8,10 @@ class Game
 
     public function roll(int $knockedPins)
     {
+        if ($knockedPins > 10) {
+            return 'You can not knock down more than 10 pins';
+        }
+
         $this->score = $this->score + $knockedPins;
     }
 
