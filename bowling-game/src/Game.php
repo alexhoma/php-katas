@@ -20,12 +20,31 @@ class Game
 
     public function score()
     {
-        $score = 0;
-        $i = 0;
+        $score    = 0;
+        $i        = 0;
+        $isSpare  = false;
+        $isStrike = false;
 
         do {
-            $score += $this->rolls[$i++];
-            $score += $this->rolls[$i++];
+            $first  = $this->rolls[$i++];
+            $second = $this->rolls[$i++];
+
+            if ($isStrike) {
+                $score += ($first + $second) * 2;
+                $isStrike = false;
+            } else if ($isSpare) {
+                $score += ($first * 2) + $second;
+                $isSpare = false;
+            } else {
+                $score += $first + $second;
+            }
+
+            if ($first == 10) {
+                $isStrike = true;
+            }
+            if ($first + $second == 10) {
+                $isSpare = true;
+            }
 
         } while ($i < count($this->rolls));
 

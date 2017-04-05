@@ -53,11 +53,11 @@ class GameTest extends TestCase
     public function gameRollsProvider()
     {
         return [
-            [[4,4], 8],    // simple two rolls
-            [[4, 4, 2, 5], 15], // more than 2 rolls
-//            [[5, 5, 5, 1], 21],
-//            [[5, 5, 5, 1, 10, 1, 3], 44],
-//            [[1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6], 133]
+            [[4,4], 8],           // simple two rolls
+            [[4, 4, 2, 5], 15],   // more than 2 rolls
+            [[5, 5, 5, 1], 21],   // is spare
+            [[10, 2, 5, 1], 24],  // is Strike
+//            [[1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6], 133] // final
         ];
     }
 }
