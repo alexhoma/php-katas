@@ -18,7 +18,7 @@ class Game
         $this->rolls[] = $knockedPins;
     }
 
-    public function score()
+    public function score(): int
     {
         $score    = 0;
         $i        = 0;
@@ -42,7 +42,7 @@ class Game
             if ($first == 10) {
                 $isStrike = true;
             }
-            if ($first + $second == 10) {
+            else if ($first + $second == 10) {
                 $isSpare = true;
             }
 
@@ -51,6 +51,10 @@ class Game
         return $score;
     }
 
+    /**
+     * @param $knockedPins
+     * @throws Exception
+     */
     private function checkIsValidRoll($knockedPins)
     {
         if ($knockedPins > self::MAX_ROLL_SCORE || $knockedPins < self::MIN_ROLL_SCORE) {
