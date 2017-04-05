@@ -2,21 +2,40 @@
 
 namespace PHPKatas\BowlingGame;
 
+use Exception;
+
 class Game
 {
-    private $score;
+    const MAX_ROLL_SCORE = 10;
+    const MIN_ROLL_SCORE = 0;
+
+    private $rolls = [];
 
     public function roll(int $knockedPins)
     {
-        if ($knockedPins > 10) {
-            return 'You can not knock down more than 10 pins';
-        }
+        $this->checkIsValidRoll($knockedPins);
 
-        $this->score = $this->score + $knockedPins;
+        $this->rolls[] = $knockedPins;
     }
 
     public function score()
     {
-        return $this->score;
+        $score = 0;
+        $i = 0;
+
+        do {
+            $score += $this->rolls[$i++];
+            $score += $this->rolls[$i++];
+
+        } while ($i < count($this->rolls));
+
+        return $score;
+    }
+
+    private function checkIsValidRoll($knockedPins)
+    {
+        if ($knockedPins > self::MAX_ROLL_SCORE || $knockedPins < self::MIN_ROLL_SCORE) {
+            throw new Exception('Not a valid roll');
+        }
     }
 }
