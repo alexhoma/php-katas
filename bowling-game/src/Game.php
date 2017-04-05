@@ -22,24 +22,32 @@ class Game
     {
         $score    = 0;
         $i        = 0;
+        $isLastRoll = false;
         $isSpare  = false;
         $isStrike = false;
 
         do {
             $first  = $this->rolls[$i++];
-            $second = $this->rolls[$i++];
-
-            if ($isStrike) {
-                $score += ($first + $second) * 2;
-                $isStrike = false;
-            } else if ($isSpare) {
-                $score += ($first * 2) + $second;
-                $isSpare = false;
-            } else {
-                $score += $first + $second;
+            if (!$isLastRoll) {
+                $second = $this->rolls[$i++];
             }
 
-            if ($first == 10) {
+            if ($isStrike && !$isLastRoll) {
+                $score += ($first + $second) * 2;
+                $isStrike = false;
+            } else if ($isSpare && !$isLastRoll) {
+                $score += ($first * 2) + $second;
+                $isSpare = false;
+            } else if (!$isLastRoll) {
+                $score += $first + $second;
+            } else {
+                $score += $first;
+            }
+
+            if ($i == count($this->rolls) - 1) { // is last roll
+                $isLastRoll = true;
+            }
+            else if ($first == 10) {
                 $isStrike = true;
             }
             else if ($first + $second == 10) {
